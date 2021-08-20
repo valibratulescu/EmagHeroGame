@@ -1,0 +1,27 @@
+{
+    "name": "valibratulescu/emagia-hero",
+    "type": "project",
+    "description": "Emag Hero Game",
+    "authors": [
+        {
+            "name": "Vali Bratulescu",
+            "email": "vali.bratulescu@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Emagia\\Hero\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
