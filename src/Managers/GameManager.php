@@ -25,6 +25,11 @@ class GameManager
     const DELAY_BETWEEN_ATTACKS = 3;
 
     /**
+     * @var string
+     */
+    const NO_WINNER = "NO WINNER";
+
+    /**
      * List of players
      *
      * @var Player[]
@@ -42,6 +47,20 @@ class GameManager
      * @var int
      */
     private $countTurns = 0;
+
+    /**
+     * The winner name
+     *
+     * @var string
+     */
+    private $winner = null;
+
+    /**
+     * True if no one won due to the max number of turns reached
+     *
+     * @var bool
+     */
+    private $draw = false;
 
     public function __construct()
     {
@@ -63,6 +82,8 @@ class GameManager
 
             while (true) {
                 if ($this->countTurns === self::MAX_TURNS) {
+                    $this->setDraw();
+                    $this->setWinner(self::NO_WINNER);
                     $this->log("Unfortunately, our hero could not defeat the beast.");
 
                     break;
@@ -79,7 +100,8 @@ class GameManager
                 $this->countTurns++;
             }
         } catch (\Throwable $th) {
-            $this->log($th->getMessage());
+            $this->log("Game crashed");
+            $this->log("===> {$th->getMessage()} <===");
         }
 
         $this->cliManager->destroy();
@@ -90,7 +112,7 @@ class GameManager
      *
      * @throws Exception
      */
-    private function initPlayers(): void
+    public function initPlayers(): void
     {
         $this->log("Initializing players...");
 
@@ -103,6 +125,48 @@ class GameManager
         }
 
         $this->log("Done initializing players.");
+    }
+
+    /**
+     * @return Player[]
+     */
+    public function getPlayers(): array
+    {
+        return $this->players;
+    }
+
+    /**
+     * @return void
+     */
+    public function setDraw(): void
+    {
+        $this->draw = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDrawGame(): bool
+    {
+        return $this->draw;
+    }
+
+    /**
+     * @param string $winner
+     *
+     * @return void
+     */
+    public function setWinner(string $winner): void
+    {
+        $this->winner = $winner;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getWinner(): string
+    {
+        return $this->winner;
     }
 
     /**
@@ -192,6 +256,7 @@ class GameManager
 
             /** If the defender has been defeated */
             if (\array_key_exists("defeat", $outcome) && $outcome["defeat"] === true) {
+                $this->setWinner($attackerName);
                 $this->log("{$attackerName} won. {$defenderName} has been defeated!");
 
                 return true;
@@ -205,6 +270,7 @@ class GameManager
 
         /** If the attacker misses his target */
         $this->log("{$attackerName} misses the target. {$defenderName} got lucky this time");
+        $this->log("{$defenderName} has {$outcome["remainingHealth"]} HP left");
 
         return false;
     }

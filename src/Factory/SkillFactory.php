@@ -94,12 +94,12 @@ class SkillFactory
         $classFilePath = AutoloaderUtils::buildClassFilePath(self::CLASS_ROOT_PATH . "/{$skillClass}");
 
         if (file_exists($classFilePath) === false) {
-            throw new \Exception("Fail to load class file for skill: [$skill].");
+            throw new \Exception("Fail to load class file [{$classFilePath}] for skill [$skill].");
         }
 
         $fullClassName = AutoloaderUtils::buildNamespaceFromParts([self::CLASS_ROOT_PATH, $skillClass]);
 
-        include $classFilePath;
+        require_once $classFilePath;
 
         $classLoaded = class_exists($fullClassName);
 

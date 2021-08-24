@@ -173,15 +173,16 @@ class Player
      */
     public function attack(Player $defender): array
     {
+        $health = $defender->getStatValue("health");
+
         /** Check if the defender can dodge the hit comming from the attacker */
         if ($defender->isLucky()) {
             return [
-                "success"      => false,
-                "targetMissed" => true,
+                "success"         => false,
+                "targetMissed"    => true,
+                "remainingHealth" => $health,
             ];
         }
-
-        $health = $defender->getStatValue("health");
 
         /** Calculates the damage dealt by the attacker */
         $damage = $this->calculateDamage($defender);

@@ -73,9 +73,9 @@ class Skill implements SkillInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getChance(): string
+    public function getChance(): int
     {
         return $this->chance;
     }
