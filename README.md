@@ -111,80 +111,73 @@ Presenting players...
 
 ======BEAST======
 
-health => 75
-strength => 63
+health => 82
+strength => 64
 defence => 43
-speed => 54
-luck => 37
+speed => 51
+luck => 40
 
 ======ORDERUS======
 
-health => 73
-strength => 77
-defence => 46
+health => 80
+strength => 72
+defence => 48
 speed => 40
-luck => 12
+luck => 18
 
 Done presenting players.
 Players are warming up...
 ========================================
 BEAST is ready to strike!
-BEAST strength is 63
+BEAST strength is 64
 ORDERUS defence is 43
-BEAST hits the target and deals 20 damage
-ORDERUS has 53 HP left
+BEAST hits the target and deals 21 damage
+ORDERUS has 59 HP left
+========================================
+ORDERUS is ready to strike!
+ORDERUS strength is 72
+BEAST defence is 48
+ORDERUS hits the target and deals 24 damage
+BEAST has 58 HP left
+========================================
+BEAST is ready to strike!
+BEAST misses the target. ORDERUS got lucky this time
+ORDERUS has 59 HP left
 ========================================
 ORDERUS is ready to strike!
 ORDERUS misses the target. BEAST got lucky this time
+BEAST has 58 HP left
 ========================================
 BEAST is ready to strike!
-BEAST strength is 63
+BEAST misses the target. ORDERUS got lucky this time
+ORDERUS has 59 HP left
+========================================
+ORDERUS is ready to strike!
+ORDERUS strength is 72
+BEAST defence is 48
+ORDERUS hits the target and deals 24 damage
+BEAST has 34 HP left
+========================================
+BEAST is ready to strike!
+BEAST strength is 64
 ORDERUS defence is 43
-Skill MAGIC SHIELD activated for ORDERUS
-BEAST hits the target and deals 10 damage
-ORDERUS has 43 HP left
+BEAST hits the target and deals 21 damage
+ORDERUS has 38 HP left
 ========================================
 ORDERUS is ready to strike!
 ORDERUS misses the target. BEAST got lucky this time
+BEAST has 34 HP left
 ========================================
 BEAST is ready to strike!
-BEAST strength is 63
+BEAST strength is 64
 ORDERUS defence is 43
-Skill MAGIC SHIELD activated for ORDERUS
-BEAST hits the target and deals 10 damage
-ORDERUS has 33 HP left
+BEAST hits the target and deals 21 damage
+ORDERUS has 17 HP left
 ========================================
 ORDERUS is ready to strike!
-ORDERUS strength is 77
-BEAST defence is 46
-ORDERUS hits the target and deals 31 damage
-BEAST has 44 HP left
-========================================
-BEAST is ready to strike!
-BEAST strength is 63
-ORDERUS defence is 43
-BEAST hits the target and deals 20 damage
-ORDERUS has 13 HP left
-========================================
-ORDERUS is ready to strike!
-ORDERUS strength is 77
-BEAST defence is 46
-ORDERUS hits the target and deals 31 damage
-BEAST has 13 HP left
-========================================
-BEAST is ready to strike!
-BEAST strength is 63
-ORDERUS defence is 43
-Skill MAGIC SHIELD activated for ORDERUS
-BEAST hits the target and deals 10 damage
-ORDERUS has 3 HP left
-========================================
-ORDERUS is ready to strike!
-ORDERUS misses the target. BEAST got lucky this time
-========================================
-BEAST is ready to strike!
-BEAST strength is 63
-ORDERUS defence is 43
-BEAST hits the target and deals 3 damage
-BEAST won. ORDERUS has been defeated!
+ORDERUS strength is 72
+BEAST defence is 48
+Skill RAPID STRIKE activated for ORDERUS
+ORDERUS hits the target and deals 34 damage
+ORDERUS won. BEAST has been defeated!
 ```
