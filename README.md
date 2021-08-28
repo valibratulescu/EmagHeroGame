@@ -48,7 +48,7 @@ If we have a winner before the maximum number of rounds is reached, he must be d
 ## Usage
 
 ```bat
-$ php Play.php
+$ php bin/console app:hero-game
 ```
 
 ## Output example
