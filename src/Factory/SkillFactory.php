@@ -1,9 +1,8 @@
 <?php
 
-namespace Emagia\Hero\Factory;
+namespace App\Factory;
 
-use Emagia\Hero\Handlers\Skill;
-use Emagia\Hero\Utils\AutoloaderUtils;
+use App\Entity\Skill;
 use Exception;
 
 class SkillFactory
@@ -11,7 +10,12 @@ class SkillFactory
     /**
      * @var string
      */
-    const CLASS_ROOT_PATH = "Skills";
+    const CLASS_ROOT_PATH = "src/Entity/Skill";
+
+    /**
+     * @var string
+     */
+    const CLASS_NAMESPACE_PATH = "App\\Entity\\Skill";
 
     /**
      * Initializes player skills.
@@ -91,15 +95,15 @@ class SkillFactory
 
         $skillClass = implode("", $skillParts);
 
-        $classFilePath = AutoloaderUtils::buildClassFilePath(self::CLASS_ROOT_PATH . "/{$skillClass}");
+        $classFilePath = getcwd() . "/" . self::CLASS_ROOT_PATH . "/{$skillClass}.php";
 
         if (file_exists($classFilePath) === false) {
             throw new \Exception("Fail to load class file [{$classFilePath}] for skill [$skill].");
         }
 
-        $fullClassName = AutoloaderUtils::buildNamespaceFromParts([self::CLASS_ROOT_PATH, $skillClass]);
-
         require_once $classFilePath;
+
+        $fullClassName = self::CLASS_NAMESPACE_PATH . "\\{$skillClass}";
 
         $classLoaded = class_exists($fullClassName);
 
@@ -107,7 +111,7 @@ class SkillFactory
             return $fullClassName;
         }
 
-        throw new \Exception("Fail to load class for skill: [$skill].");
+        throw new \Exception("Fail to load class {$fullClassName} for skill: [$skill].");
     }
 
     /**

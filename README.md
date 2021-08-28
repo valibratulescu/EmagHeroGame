@@ -56,128 +56,61 @@ $ php Play.php
 #### Example 1
 
 ```pre
+Welcome to the holy ground
+Let the fight begin
+============
+Preparing players...
+Please enter the hero name: ORDERUS
+Please enter the beast name: LUNA
+Players are ready
+The battle is going to be between ORDERUS and LUNA
+============
 Initializing players...
 Done initializing players.
 
 Presenting players...
 
-======ORDERUS======
+======LUNA======
 
-health => 91
-strength => 80
-defence => 51
-speed => 42
-luck => 30
-
-======BEAST======
-
-health => 88
-strength => 61
-defence => 56
-speed => 40
-luck => 30
-
-Done presenting players.
-Players are warming up...
-========================================
-ORDERUS is ready to strike!
-ORDERUS strength is 80
-BEAST defence is 51
-Skill RAPID STRIKE activated for ORDERUS
-ORDERUS hits the target and deals 58 damage
-BEAST has 30 HP left
-========================================
-BEAST is ready to strike!
-BEAST strength is 61
-ORDERUS defence is 56
-BEAST hits the target and deals 5 damage
-ORDERUS has 86 HP left
-========================================
-ORDERUS is ready to strike!
-ORDERUS strength is 80
-BEAST defence is 51
-Skill RAPID STRIKE activated for ORDERUS
-ORDERUS hits the target and deals 30 damage
-ORDERUS won. BEAST has been defeated!
-```
-
-#### Example 2
-
-```pre
-Initializing players...
-Done initializing players.
-
-Presenting players...
-
-======BEAST======
-
-health => 82
-strength => 64
-defence => 43
-speed => 51
-luck => 40
+health => 67
+strength => 90
+defence => 53
+speed => 52
+luck => 31
 
 ======ORDERUS======
 
-health => 80
+health => 72
 strength => 72
 defence => 48
 speed => 40
-luck => 18
+luck => 22
 
 Done presenting players.
 Players are warming up...
-========================================
-BEAST is ready to strike!
-BEAST strength is 64
-ORDERUS defence is 43
-BEAST hits the target and deals 21 damage
-ORDERUS has 59 HP left
-========================================
+==========
+LUNA is ready to strike!
+LUNA strength is 90
+ORDERUS defence is 72
+LUNA hits the target and deals 37 damage
+ORDERUS has 35 HP left
+==========
 ORDERUS is ready to strike!
 ORDERUS strength is 72
-BEAST defence is 48
+LUNA defence is 90
 ORDERUS hits the target and deals 24 damage
-BEAST has 58 HP left
-========================================
-BEAST is ready to strike!
-BEAST misses the target. ORDERUS got lucky this time
-ORDERUS has 59 HP left
-========================================
-ORDERUS is ready to strike!
-ORDERUS misses the target. BEAST got lucky this time
-BEAST has 58 HP left
-========================================
-BEAST is ready to strike!
-BEAST misses the target. ORDERUS got lucky this time
-ORDERUS has 59 HP left
-========================================
+LUNA has 43 HP left
+==========
+LUNA is ready to strike!
+LUNA strength is 90
+ORDERUS defence is 72
+LUNA misses the target. ORDERUS got lucky this time
+ORDERUS has 35 HP left
+==========
 ORDERUS is ready to strike!
 ORDERUS strength is 72
-BEAST defence is 48
-ORDERUS hits the target and deals 24 damage
-BEAST has 34 HP left
-========================================
-BEAST is ready to strike!
-BEAST strength is 64
-ORDERUS defence is 43
-BEAST hits the target and deals 21 damage
-ORDERUS has 38 HP left
-========================================
-ORDERUS is ready to strike!
-ORDERUS misses the target. BEAST got lucky this time
-BEAST has 34 HP left
-========================================
-BEAST is ready to strike!
-BEAST strength is 64
-ORDERUS defence is 43
-BEAST hits the target and deals 21 damage
-ORDERUS has 17 HP left
-========================================
-ORDERUS is ready to strike!
-ORDERUS strength is 72
-BEAST defence is 48
+LUNA defence is 90
 Skill RAPID STRIKE activated for ORDERUS
-ORDERUS hits the target and deals 34 damage
-ORDERUS won. BEAST has been defeated!
+ORDERUS hits the target and deals 43 damage
+ORDERUS won. LUNA has been defeated!
 ```
