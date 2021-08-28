@@ -1,6 +1,6 @@
 <?php
 
-namespace Emagia\Hero\Utils;
+namespace App\Utils;
 
 class MathUtils
 {

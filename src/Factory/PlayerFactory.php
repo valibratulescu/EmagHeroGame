@@ -1,9 +1,9 @@
 <?php
 
-namespace Emagia\Hero\Factory;
+namespace App\Factory;
 
-use Emagia\Hero\Handlers\Player;
-use Emagia\Hero\Utils\MathUtils;
+use App\Entity\Player;
+use App\Utils\MathUtils;
 use Exception;
 
 class PlayerFactory
