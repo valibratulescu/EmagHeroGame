@@ -45,6 +45,11 @@ The game ends when one of the players remain without health or the number of tur
 The application must output the results each turn: what happened, which skills were used (if any), the damage done, defender’s health left.
 If we have a winner before the maximum number of rounds is reached, he must be declared.
 
+## Requirements
+
+- PHP 7.4
+- Symfony 5.3.6
+
 ## Setup
 
 ```bat
