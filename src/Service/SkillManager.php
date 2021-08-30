@@ -9,23 +9,13 @@ use Exception;
 
 class SkillManager
 {
-    /**
-     * @var MathUtils
-     */
-    private $mathUtils = null;
+    private MathUtils $mathUtils;
 
     public function __construct(MathUtils $mathUtils)
     {
         $this->mathUtils = $mathUtils;
     }
 
-    /**
-     * Initializes player skills.
-     *
-     * @param null|array $skillData
-     *
-     * @return array
-     */
     public function createSkills(?array $skillData = null): array
     {
         if (is_array($skillData) === false) {
@@ -52,34 +42,16 @@ class SkillManager
         return $data;
     }
 
-    /**
-     * @param string $skillName
-     *
-     * @return Skill
-     */
-    private function createSkill(string $skillName)
+    private function createSkill(string $skillName): Skill
     {
         return new Skill($skillName);
     }
 
-    /**
-     * @param Skill $skill
-     *
-     * @return bool
-     */
     public function canActivate(Skill $skill): bool
     {
         return $this->mathUtils->checkWinChance($skill->getChance());
     }
 
-    /**
-     * @param Skill $skill
-     * @param int $damage
-     *
-     * @return int
-     *
-     * @throws Exception
-     */
     public function activate(Skill $skill, int $damage): int
     {
         $class = $this->getSkillClass($skill->getName());
@@ -135,11 +107,6 @@ class SkillManager
         throw new \Exception("Fail to load class {$fullClassName} for skill: [$skill].");
     }
 
-    /**
-     * @param string $skillName
-     *
-     * @return string
-     */
     private function createLabel(string $skillName): string
     {
         return \strtoupper(\implode(" ", explode("_", $skillName)));

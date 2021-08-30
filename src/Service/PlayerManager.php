@@ -8,15 +8,9 @@ use Exception;
 
 class PlayerManager
 {
-    /**
-     * @var SkillManager
-     */
-    private $skillManager = null;
+    private SkillManager $skillManager;
 
-    /**
-     * @var MathUtils
-     */
-    private $mathUtils = null;
+    private MathUtils $mathUtils;
 
     public function __construct(SkillManager $skillManager, MathUtils $mathUtils)
     {
@@ -24,13 +18,6 @@ class PlayerManager
         $this->mathUtils    = $mathUtils;
     }
 
-    /**
-     * @param array $info
-     *
-     * @return Player
-     *
-     * @throws Exception
-     */
     public function createPlayer(array $info): Player
     {
         $name = $info["name"];
@@ -59,15 +46,6 @@ class PlayerManager
         return $data;
     }
 
-    /**
-     *
-     * @param Player $attacker
-     * @param Player $defender
-     *
-     * @return array
-     *
-     * @throws Exception
-     */
     public function attack(Player $attacker, Player $defender): array
     {
         $health = $defender->getHealth();
@@ -123,14 +101,6 @@ class PlayerManager
         return $this->mathUtils->checkWinChance($luck);
     }
 
-    /**
-     * @param Player $attacker
-     * @param Player $defender
-     *
-     * @return int
-     *
-     * @throws Exception
-     */
     public function calculateDamage(Player $attacker, Player $defender): int
     {
         $strength = $attacker->getStrength();
@@ -144,14 +114,6 @@ class PlayerManager
         return $damage;
     }
 
-    /**
-     * @param Player $player
-     * @param int $damage
-     *
-     * @return int
-     *
-     * @throws Exception
-     */
     public function activateSkills(Player $player, int $damage): int
     {
         foreach ($player->getSkills($player->getRole()) as $skill) {

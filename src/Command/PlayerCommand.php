@@ -11,28 +11,20 @@ use Symfony\Component\Console\Question\Question;
 
 class PlayerCommand extends Command
 {
-    /**
-     * @var string
-     */
     protected static $defaultName = "app:player";
 
-    /**
-     * @var string
-     */
-    protected $playerType = "";
+    protected string $playerType = "";
 
-    /**
-     * @var string
-     */
-    public $playerName = "";
+    public string $playerName = "";
 
     /**
      * @return void
      */
     protected function configure(): void
     {
-        $this->setDescription("Creates the {$this->playerType} player")
-             ->setHelp("This command allows you to create the {$this->playerType} player...");
+        $this
+            ->setDescription("Creates the {$this->playerType} player")
+            ->setHelp("This command allows you to create the {$this->playerType} player...");
     }
 
     /**

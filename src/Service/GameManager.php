@@ -11,70 +11,38 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GameManager
 {
     /**
-     * List of players
-     *
      * @var EntityPlayer[]
      */
-    private $players = [];
+    private array $players = [];
 
-    /**
-     * @var OutputInterface
-     */
-    private $output = [];
+    private OutputInterface $output;
 
     /**
      * Stores the number of turns between the players
-     *
-     * @var int
      */
-    private $countTurns = 0;
+    private int $countTurns = 0;
 
-    /**
-     * @var array
-     */
-    private $playersMeta = null;
+    private array $playersMeta;
 
-    /**
-     * @var PlayerManager
-     */
-    private $playerManager = null;
+    private PlayerManager $playerManager;
 
-    /**
-     * @var EntityGame
-     */
-    private $game = null;
+    private EntityGame $game;
 
     public function __construct(PlayerManager $playerManager)
     {
         $this->playerManager = $playerManager;
     }
 
-    /**
-     * @param OutputInterface $output
-     *
-     * @return void
-     */
-    public function setOutput(OutputInterface $output)
+    public function setOutput(OutputInterface $output): void
     {
         $this->output = $output;
     }
 
-    /**
-     * @param EntityGame $game
-     *
-     * @return void
-     */
-    public function setEntityGame(EntityGame $game)
+    public function setEntityGame(EntityGame $game): void
     {
         $this->game = $game;
     }
 
-    /**
-     * @param string $heroName
-     * @param string $beastName
-     *
-     * @return void
-     */
     public function initPlayersMeta(string $heroName, string $beastName): void
     {
         $this->playersMeta = [
@@ -83,11 +51,6 @@ class GameManager
         ];
     }
 
-    /**
-     * @return void
-     *
-     * @throws Exception
-     */
     public function play(): void
     {
         try {
@@ -121,11 +84,6 @@ class GameManager
         }
     }
 
-    /**
-     * @return void
-     *
-     * @throws Exception
-     */
     public function initPlayers(): void
     {
         $this->log("Initializing players...");
@@ -158,11 +116,6 @@ class GameManager
         });
     }
 
-    /**
-     * @return void
-     *
-     * @throws Exception
-     */
     private function presentPlayers(): void
     {
         $this->log("\r\nPresenting players...");
@@ -178,11 +131,6 @@ class GameManager
         $this->log("\r\nDone presenting players.");
     }
 
-    /**
-     * @return void
-     *
-     * @throws Exception
-     */
     private function prepareToJoin(): void
     {
         $this->log("Players are warming up...");
@@ -246,17 +194,11 @@ class GameManager
         return false;
     }
 
-    /**
-     * @return void
-     */
     private function changePlayersTurn(): void
     {
         $this->players = \array_reverse($this->players);
     }
 
-    /**
-     * @return void
-     */
     private function delay(): void
     {
         \sleep(Game::DELAY_BETWEEN_ATTACKS);

@@ -12,15 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GameCommand extends Command
 {
-    /**
-     * @var string
-     */
     protected static $defaultName = "app:hero-game";
 
-    /**
-     * @var GameManager
-     */
-    private $gameManager;
+    private GameManager $gameManager;
 
     public function __construct(GameManager $gameManager)
     {
@@ -35,7 +29,7 @@ class GameCommand extends Command
     protected function configure(): void
     {
         $this->setDescription("Play hero game")
-             ->setHelp("This command allows you to play the hero game...");
+            ->setHelp("This command allows you to play the hero game...");
     }
 
     /**

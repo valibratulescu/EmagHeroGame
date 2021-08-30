@@ -79,4 +79,29 @@ class Player
      * @var string
      */
     const ROLE_DEFENDER = "defence";
+
+    /**
+     * @var string
+     */
+    const HEALTH = "health";
+
+    /**
+     * @var string
+     */
+    const STRENGTH = "strength";
+
+    /**
+     * @var string
+     */
+    const DEFENCE = "defence";
+
+    /**
+     * @var string
+     */
+    const SPEED = "speed";
+
+    /**
+     * @var string
+     */
+    const LUCK = "luck";
 }
