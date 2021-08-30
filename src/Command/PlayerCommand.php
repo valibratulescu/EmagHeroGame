@@ -3,24 +3,47 @@
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
 class PlayerCommand extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = "app:player";
 
+    /**
+     * @var string
+     */
     protected $playerType = "";
 
+    /**
+     * @var string
+     */
     public $playerName = "";
 
+    /**
+     * @return void
+     */
     protected function configure(): void
     {
         $this->setDescription("Creates the {$this->playerType} player")
              ->setHelp("This command allows you to create the {$this->playerType} player...");
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return int
+     *
+     * @throws LogicException
+     * @throws InvalidArgumentException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $helper = $this->getHelper("question");

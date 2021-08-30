@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace App\Service\Utils;
 
 class MathUtils
 {
@@ -10,7 +10,7 @@ class MathUtils
      *
      * @return int
      */
-    public static function generateRandomNumber(int $min, int $max): int
+    public function generateRandomNumber(int $min, int $max): int
     {
         return \rand($min, $max);
     }
@@ -20,7 +20,7 @@ class MathUtils
      *
      * @return bool
      */
-    public static function checkWinChance(int $luck): bool
+    public function checkWinChance(int $luck): bool
     {
         $chance = ($luck / (100 + $luck));
 
@@ -32,7 +32,7 @@ class MathUtils
      *
      * @return int
      */
-    public static function round($number): int
+    public function round($number): int
     {
         return \round($number);
     }

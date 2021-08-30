@@ -2,32 +2,14 @@
 
 namespace App\Service;
 
+use App\Entity\Constant\Game;
 use App\Entity\Constant\Player;
+use App\Entity\Game as EntityGame;
 use App\Entity\Player as EntityPlayer;
-use App\Factory\PlayerFactory;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GameManager
 {
-    /**
-     * Max number of attacks that can occur between the players.
-     *
-     * @var int
-     */
-    const MAX_TURNS = 20;
-
-    /**
-     * Delay in seconds between the fights.
-     *
-     * @var int
-     */
-    const DELAY_BETWEEN_ATTACKS = 1.5;
-
-    /**
-     * @var string
-     */
-    const NO_WINNER = "NO WINNER";
-
     /**
      * List of players
      *
@@ -48,32 +30,43 @@ class GameManager
     private $countTurns = 0;
 
     /**
-     * The winner name
-     *
-     * @var string
-     */
-    private $winner = null;
-
-    /**
-     * True if no one won due to the max number of turns reached
-     *
-     * @var bool
-     */
-    private $draw = false;
-
-    /**
      * @var array
      */
     private $playersMeta = null;
+
+    /**
+     * @var PlayerManager
+     */
+    private $playerManager = null;
+
+    /**
+     * @var EntityGame
+     */
+    private $game = null;
+
+    public function __construct(PlayerManager $playerManager)
+    {
+        $this->playerManager = $playerManager;
+    }
 
     /**
      * @param OutputInterface $output
      *
      * @return void
      */
-    public function initCommandLine(OutputInterface $output)
+    public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
+    }
+
+    /**
+     * @param EntityGame $game
+     *
+     * @return void
+     */
+    public function setEntityGame(EntityGame $game)
+    {
+        $this->game = $game;
     }
 
     /**
@@ -104,9 +97,9 @@ class GameManager
             $this->prepareToJoin();
 
             while (true) {
-                if ($this->countTurns === self::MAX_TURNS) {
-                    $this->setDraw();
-                    $this->setWinner(self::NO_WINNER);
+                if ($this->countTurns === Game::MAX_TURNS) {
+                    $this->game->setDraw();
+                    $this->game->setWinner(Game::NO_WINNER);
                     $this->log("Unfortunately, our hero could not defeat the beast.");
 
                     break;
@@ -138,7 +131,7 @@ class GameManager
         $this->log("Initializing players...");
 
         foreach ($this->playersMeta as $meta) {
-            $this->players[] = PlayerFactory::createPlayer($meta);
+            $this->players[] = $this->playerManager->createPlayer($meta);
         }
 
         if (count($this->players) === 0) {
@@ -146,48 +139,6 @@ class GameManager
         }
 
         $this->log("Done initializing players.");
-    }
-
-    /**
-     * @return Player[]
-     */
-    public function getPlayers(): array
-    {
-        return $this->players;
-    }
-
-    /**
-     * @return void
-     */
-    public function setDraw(): void
-    {
-        $this->draw = true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDrawGame(): bool
-    {
-        return $this->draw;
-    }
-
-    /**
-     * @param string $winner
-     *
-     * @return void
-     */
-    public function setWinner(string $winner): void
-    {
-        $this->winner = $winner;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getWinner(): string
-    {
-        return $this->winner;
     }
 
     /**
@@ -199,14 +150,11 @@ class GameManager
     private function sortPlayers(): void
     {
         usort($this->players, function ($player1, $player2) {
-            $stats1 = $player1->getStats(false);
-            $stats2 = $player2->getStats(false);
-
-            if ($stats1["speed"] < $stats2["speed"]) {
+            if ($player1->getSpeed() < $player2->getSpeed()) {
                 return true;
             }
 
-            return $stats1["luck"] < $stats2["luck"];
+            return $player1->getLuck() < $player2->getLuck();
         });
     }
 
@@ -222,7 +170,7 @@ class GameManager
         foreach ($this->players as $player) {
             $this->log("\r\n======{$player->getName()}======\r\n");
 
-            foreach ($player->getStats(false) as $attribute => $value) {
+            foreach ($player->getStats() as $attribute => $value) {
                 $this->log("{$attribute} => {$value}");
             }
         }
@@ -269,17 +217,17 @@ class GameManager
 
         $this->log("{$attackerName} is ready to strike!");
         $this->delay();
-        $this->log("{$attacker->getName()} strength is {$attacker->getStatValue("strength")}");
-        $this->log("{$defender->getName()} defence is {$defender->getStatValue("strength")}");
+        $this->log("{$attacker->getName()} strength is {$attacker->getStrength()}");
+        $this->log("{$defender->getName()} defence is {$defender->getDefence()}");
 
-        $outcome = $attacker->attack($defender);
+        $outcome = $this->playerManager->attack($attacker, $defender);
 
         if ($outcome["success"] === true) {
             $this->log("{$attackerName} hits the target and deals {$outcome["damageDone"]} damage");
 
             /** If the defender has been defeated */
             if (\array_key_exists("defeat", $outcome) && $outcome["defeat"] === true) {
-                $this->setWinner($attackerName);
+                $this->game->setWinner($attackerName);
                 $this->log("{$attackerName} won. {$defenderName} has been defeated!");
 
                 return true;
@@ -311,7 +259,7 @@ class GameManager
      */
     private function delay(): void
     {
-        \sleep(self::DELAY_BETWEEN_ATTACKS);
+        \sleep(Game::DELAY_BETWEEN_ATTACKS);
     }
 
     /**

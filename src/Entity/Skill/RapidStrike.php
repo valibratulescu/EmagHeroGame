@@ -2,9 +2,9 @@
 
 namespace App\Entity\Skill;
 
-use App\Entity\Skill;
+use App\Entity\SkillInterface;
 
-class RapidStrike extends Skill
+class RapidStrike implements SkillInterface
 {
     /**
      * @inheritdoc

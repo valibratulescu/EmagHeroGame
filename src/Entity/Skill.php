@@ -2,10 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\SkillInterface;
-use App\Utils\MathUtils;
-
-class Skill implements SkillInterface
+class Skill
 {
     /**
      * @var string
@@ -33,7 +30,9 @@ class Skill implements SkillInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $role
+     *
+     * @return void
      */
     public function setRole(string $role): void
     {
@@ -41,7 +40,9 @@ class Skill implements SkillInterface
     }
 
     /**
-     * @inheritdoc
+     * @param int $chance
+     *
+     * @return void
      */
     public function setChance(int $chance): void
     {
@@ -49,7 +50,9 @@ class Skill implements SkillInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $label
+     *
+     * @return void
      */
     public function setLabel(string $label): void
     {
@@ -86,21 +89,5 @@ class Skill implements SkillInterface
     public function getLabel(): string
     {
         return $this->label;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function activate(int $damage): int
-    {
-        return $damage;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canActivate(): bool
-    {
-        return MathUtils::checkWinChance($this->chance);
     }
 }

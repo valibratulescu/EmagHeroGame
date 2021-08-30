@@ -2,16 +2,15 @@
 
 namespace App\Entity\Skill;
 
-use App\Entity\Skill;
-use App\Utils\MathUtils;
+use App\Entity\SkillInterface;
 
-class MagicShield extends Skill
+class MagicShield implements SkillInterface
 {
     /**
      * @inheritdoc
      */
     public function activate(int $damage): int
     {
-        return MathUtils::round($damage / 2);
+        return \round($damage / 2);
     }
 }

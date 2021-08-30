@@ -4,6 +4,9 @@ namespace App\Entity\Constant;
 
 class Player
 {
+    /**
+     * @var array
+     */
     const HERO = [
         "skills" => [
             "rapid_strike" => [
@@ -39,6 +42,9 @@ class Player
         ],
     ];
 
+    /**
+     * @var array
+     */
     const BEAST = [
         "stats" => [
             "health"   => [
@@ -63,4 +69,14 @@ class Player
             ],
         ],
     ];
+
+    /**
+     * @var string
+     */
+    const ROLE_ATTACKER = "attack";
+
+    /**
+     * @var string
+     */
+    const ROLE_DEFENDER = "defence";
 }

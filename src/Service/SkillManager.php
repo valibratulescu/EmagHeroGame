@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Factory;
+namespace App\Service;
 
+use App\Entity\Constant\Skill as ConstantSkill;
 use App\Entity\Skill;
+use App\Service\Utils\MathUtils;
 use Exception;
 
-class SkillFactory
+class SkillManager
 {
     /**
-     * @var string
+     * @var MathUtils
      */
-    const CLASS_ROOT_PATH = "src/Entity/Skill";
+    private $mathUtils = null;
 
-    /**
-     * @var string
-     */
-    const CLASS_NAMESPACE_PATH = "App\\Entity\\Skill";
+    public function __construct(MathUtils $mathUtils)
+    {
+        $this->mathUtils = $mathUtils;
+    }
 
     /**
      * Initializes player skills.
      *
-     * @param array $skillData
+     * @param null|array $skillData
      *
      * @return array
-     *
-     * @throws Exception
      */
-    public static function createSkills(?array $skillData = null): array
+    public function createSkills(?array $skillData = null): array
     {
         if (is_array($skillData) === false) {
             return [];
@@ -35,8 +35,8 @@ class SkillFactory
         $data = [];
 
         foreach ($skillData as $skillName => $skillMeta) {
-            $skill = self::createSkill($skillName);
-            $label = self::createLabel($skillName);
+            $skill = $this->createSkill($skillName);
+            $label = $this->createLabel($skillName);
 
             $role   = $skillMeta["role"];
             $chance = $skillMeta["chance"];
@@ -53,17 +53,38 @@ class SkillFactory
     }
 
     /**
-     * @param string $skill
+     * @param string $skillName
      *
      * @return Skill
+     */
+    private function createSkill(string $skillName)
+    {
+        return new Skill($skillName);
+    }
+
+    /**
+     * @param Skill $skill
+     *
+     * @return bool
+     */
+    public function canActivate(Skill $skill): bool
+    {
+        return $this->mathUtils->checkWinChance($skill->getChance());
+    }
+
+    /**
+     * @param Skill $skill
+     * @param int $damage
+     *
+     * @return int
      *
      * @throws Exception
      */
-    public static function createSkill(string $skill): Skill
+    public function activate(Skill $skill, int $damage): int
     {
-        $skillClass = self::getSkillClass($skill);
+        $class = $this->getSkillClass($skill->getName());
 
-        return new $skillClass($skill);
+        return (new $class())->activate($damage);
     }
 
     /**
@@ -85,7 +106,7 @@ class SkillFactory
      *
      * @throws Exception
      */
-    private static function getSkillClass(string $skill): string
+    private function getSkillClass(string $skill): string
     {
         $skillParts = explode("_", $skill);
 
@@ -95,7 +116,7 @@ class SkillFactory
 
         $skillClass = implode("", $skillParts);
 
-        $classFilePath = getcwd() . "/" . self::CLASS_ROOT_PATH . "/{$skillClass}.php";
+        $classFilePath = getcwd() . "/" . ConstantSkill::CLASS_ROOT_PATH . "/{$skillClass}.php";
 
         if (file_exists($classFilePath) === false) {
             throw new \Exception("Fail to load class file [{$classFilePath}] for skill [$skill].");
@@ -103,7 +124,7 @@ class SkillFactory
 
         require_once $classFilePath;
 
-        $fullClassName = self::CLASS_NAMESPACE_PATH . "\\{$skillClass}";
+        $fullClassName = ConstantSkill::CLASS_NAMESPACE_PATH . "\\{$skillClass}";
 
         $classLoaded = class_exists($fullClassName);
 
@@ -119,7 +140,7 @@ class SkillFactory
      *
      * @return string
      */
-    private static function createLabel(string $skillName): string
+    private function createLabel(string $skillName): string
     {
         return \strtoupper(\implode(" ", explode("_", $skillName)));
     }
