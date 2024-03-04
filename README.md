@@ -277,7 +277,6 @@ Shadow Hunter has been summoned. He's ready to fight our hero
 Players are ready to fight. The battle shall begin.
 Shadow Hunter will strike now
 Let's see if Orderus can resist
-Successfully acquired the "{resource}" lock.
 
 
 [Magic Shield] skill activated for Orderus
@@ -285,21 +284,18 @@ Shadow Hunter strikes for 21 damage
 Orderus's remaining health is 75
 Orderus will strike now
 Let's see if Shadow Hunter can resist
-Successfully acquired the "{resource}" lock.
 
 
 Orderus strikes for 19 damage
 Shadow Hunter's remaining health is 50
 Shadow Hunter will strike now
 Let's see if Orderus can resist
-Successfully acquired the "{resource}" lock.
 
 
 Shadow Hunter strikes for 42 damage
 Orderus's remaining health is 33
 Orderus will strike now
 Let's see if Shadow Hunter can resist
-Successfully acquired the "{resource}" lock.
 
 
 [Rapid Strike] skill activated for Orderus
@@ -307,7 +303,6 @@ Orderus strikes for 38 damage
 Shadow Hunter's remaining health is 12
 Shadow Hunter will strike now
 Let's see if Orderus can resist
-Successfully acquired the "{resource}" lock.
 
 
 [Magic Shield] skill activated for Orderus
@@ -315,13 +310,11 @@ Shadow Hunter strikes for 21 damage
 Orderus's remaining health is 12
 Orderus will strike now
 Let's see if Shadow Hunter can resist
-Successfully acquired the "{resource}" lock.
 
 
 Shadow Hunter manages to dodge the attack from Orderus
 Shadow Hunter will strike now
 Let's see if Orderus can resist
-Successfully acquired the "{resource}" lock.
 
 
 Shadow Hunter strikes for 42 damage
