@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Lock\LockFactory;
 
 #[AsCommand(
     name: "app:hero-game",
@@ -20,7 +21,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class HeroGameCommand extends Command
 {
-    public function __construct(private readonly GameService $gameService, ?string $name = null)
+    private const string LOCK_KEY = "hero-game-command";
+
+    public function __construct(
+        private readonly GameService $gameService,
+        private readonly LockFactory $lockFactory,
+        ?string $name = null
+    )
     {
         parent::__construct($name);
     }
@@ -28,6 +35,13 @@ class HeroGameCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        $lock = $this->lockFactory->createLock(static::LOCK_KEY);
+
+        if (!$lock->acquire()) {
+            $io->warning("There is already an ongoing battle");
+            return Command::INVALID;
+        }
 
         try {
             $io->title("Welcome to the forest of Emagia!");
@@ -66,6 +80,7 @@ class HeroGameCommand extends Command
 
             return Command::FAILURE;
         } finally {
+            $lock->release();
             $this->gameService->letThePlayersRest();
         }
     }
